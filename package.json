@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.7",
+    "bulma": "^0.9.4",
+    "next": "13.5.4",
     "react": "^18",
     "react-dom": "^18",
-    "next": "13.5.4"
+    "sass": "^1.69.3",
+    "swr": "^2.2.4"
   },
   "devDependencies": {
     "eslint": "^8",
