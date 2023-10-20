@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import CreateTodoForm from "./createTodoForm";
+import Link from "next/link";
 
 export default function TodoComponent({ todo }) {
   const [editMode, setEditMode] = useState(false);
@@ -34,9 +35,13 @@ export default function TodoComponent({ todo }) {
           className="button is-small ml-2 is-rounded"
           onClick={handleShowMore}
         >
-          
+
           {showMore ? 'Show less' : 'Show more'}
         </button>
+
+        <Link href={'/todos/' + todo.id}>
+          Single page
+        </Link>
 
         {/* Show edit form */}
         <button
@@ -47,7 +52,7 @@ export default function TodoComponent({ todo }) {
         </button>
       </span>
 
-      {editMode && <CreateTodoForm todo={todo} />}
+      {editMode && <CreateTodoForm id={todo.id} />}
     </div>
   );
 }

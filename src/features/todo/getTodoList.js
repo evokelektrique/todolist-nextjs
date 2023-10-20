@@ -1,1 +1,0 @@
-export const getTodoList = (...args) => fetch(...args).then(res => res.json());

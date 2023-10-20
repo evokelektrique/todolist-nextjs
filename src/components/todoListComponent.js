@@ -1,19 +1,20 @@
 "use client"
 
 import useSWR from 'swr'
-import TodoComponent from './todoComponent.jsx';
-import { getTodoList } from '@/features/todo/getTodoList';
+import TodoComponent from './todoComponent';
 import PaginationComponent from './paginationComponent';
 import { useState } from 'react';
-import { useAuth } from "@/hooks/auth";
+import { getTodo } from '@/features/todo/getTodo';
+import TodoListSkeletonComponent from './todoListSkeletonComponent';
 
 export default function TodoListComponent() {
-    const { user } = useAuth({ middleware: 'auth' });
     const [page, setPage] = useState(1);
-    const { data, error, isLoading } = useSWR(process.env.NEXT_PUBLIC_API_BACKEND_URL + '/todo/list?page=' + page, getTodoList);
+    const { data, error, isLoading } = useSWR(process.env.NEXT_PUBLIC_API_BACKEND_URL + '/todo/list?page=' + page, getTodo);
 
-    if (error) return <div>failed to load - {JSON.stringify(error)}</div>
-    if (isLoading) return <div>loading...</div>
+    if (error) return <div>failed to load - {error.message}</div>
+    if (isLoading) {
+        return(<TodoListSkeletonComponent />)
+    }
 
     const fetchNextPage = (link) => {
         if (!link) {

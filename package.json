@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
+    "@hookform/error-message": "^2.0.1",
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.5.1",
     "bulma": "^0.9.4",
@@ -18,6 +19,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.47.0",
     "sass": "^1.69.3",
+    "skeleton-elements": "^4.0.1",
     "swr": "^2.2.4"
   },
   "devDependencies": {

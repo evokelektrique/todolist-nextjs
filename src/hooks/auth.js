@@ -36,11 +36,12 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             })
     }
 
-    const login = async ({ setErrors, setStatus, ...props }) => {
+    const login = async ({setError, ...props }) => {
         await csrf()
 
-        setErrors([])
-        setStatus(null)
+        // setErrors([])
+        
+        // setStatus(null)
 
         axios
             .post('/login', props)
@@ -48,7 +49,10 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             .catch(error => {
                 if (error.response.status !== 422) throw error
 
-                setErrors(error.response.data.errors)
+                // setErrors(error.response.data.errors)
+                Object.entries(error.response.data.errors).map(([key, value]) => {
+                    setError(key, { type: 'focus', message: value });   
+                });
             })
     }
 
