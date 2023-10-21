@@ -32,6 +32,7 @@ The application uses Axios, a popular HTTP client, to interact with the Laravel 
 ## Contributing
 
 If you'd like to contribute to this project, please follow the standard GitHub fork and pull request workflow. Contributions and bug reports are welcome.
-License
+
+## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
