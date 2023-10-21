@@ -3,56 +3,67 @@
 import { useState } from "react";
 import CreateTodoForm from "./createTodoForm";
 import Link from "next/link";
+import deleteTodo from "@/features/todo/deleteTodo";
 
-export default function TodoComponent({ todo }) {
-  const [editMode, setEditMode] = useState(false);
-  const [showMore, setShowMore] = useState(false);
+export default function TodoComponent({ mutate, todo }) {
+    const [editMode, setEditMode] = useState(false);
+    const [showMore, setShowMore] = useState(false);
 
-  function handleShowMore() {
-    setShowMore(!showMore);
-  }
+    function handleShowMore() {
+        setShowMore(!showMore);
+    }
 
-  function handleEditMode() {
-    setEditMode(!editMode);
-  }
+    function handleEditMode() {
+        setEditMode(!editMode);
+    }
 
-  return (
-    <div className="card mb-3 p-3 is-rounded">
-      {/* id */}
-      <span className="mr-2">#{todo.id}</span>
+    async function handleDelete() {
+        const destroy = await deleteTodo({ id: todo.id });
+        console.log(destroy)
+        mutate();
+    }
 
-      {/* Status */}
-      <span className={todo.complete ? "has-text-success" : "has-text-danger"}>
-        {todo.complete ? "Complete" : "Draft"}
-      </span>
+    return (
+        <div className="card mb-3 p-3 is-rounded">
+            {/* id */}
+            <span className="mr-2">#{todo.id}</span>
 
-      {/* Content */}
-      <span className="ml-2 is-size-6">
-        {showMore ? todo.content : todo.content.substring(0, 100) + "..."}
+            {/* Status */}
+            <span className={todo.complete ? "has-text-success" : "has-text-danger"}>
+                {todo.complete ? "Complete" : "Draft"}
+            </span>
 
-        {/* Show more and less */}
-        <button
-          className="button is-small ml-2 is-rounded"
-          onClick={handleShowMore}
-        >
+            {/* Content */}
+            <span className="ml-2 is-size-6">
+                {showMore ? todo.content : todo.content.substring(0, 100) + "..."}
 
-          {showMore ? 'Show less' : 'Show more'}
-        </button>
+                {/* Show more and less */}
+                <button
+                    className="button is-small ml-2 is-rounded"
+                    onClick={handleShowMore}
+                >
 
-        <Link href={'/todos/' + todo.id}>
-          Single page
-        </Link>
+                    {showMore ? 'Show less' : 'Show more'}
+                </button>
 
-        {/* Show edit form */}
-        <button
-          className="button is-small ml-2 is-rounded"
-          onClick={handleEditMode}
-        >
-          {editMode ? 'Close Edit' : 'Edit'}
-        </button>
-      </span>
+                <Link href={'/todos/' + todo.id}>
+                    <button className="button is-small ml-2 is-rounded">Single page</button>
+                </Link>
 
-      {editMode && <CreateTodoForm id={todo.id} />}
-    </div>
-  );
+                {/* Show edit form */}
+                <button
+                    className="button is-small ml-2 is-rounded"
+                    onClick={handleEditMode}
+                >
+                    {editMode ? 'Close Edit' : 'Edit'}
+                </button>
+
+
+                {/* Delete */}
+                <button onClick={handleDelete} className="button is-danger is-small ml-2 is-rounded">Delete</button>
+            </span>
+
+            {editMode && <CreateTodoForm id={todo.id} />}
+        </div>
+    );
 }

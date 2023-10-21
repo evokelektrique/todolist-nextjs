@@ -13,15 +13,12 @@ export default function Login() {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isSubmitting },
         setError,
     } = useForm()
 
-    const [isWaiting, setIsWaiting] = useState(false)
-
     const onSubmit = async (data) => {
         const { email, password, remember } = data;
-        setIsWaiting(true);
 
         await login({
             email,
@@ -29,8 +26,6 @@ export default function Login() {
             remember,
             setError,
         })
-
-        setIsWaiting(false);
     }
 
     return (
@@ -59,7 +54,7 @@ export default function Login() {
             </div>
 
             <div>
-                <button type='submit' className={'button is-success ' + (isWaiting && 'is-loading')} value={"submit"}>Submit</button>
+                <button type='submit' className={'button is-success ' + (isSubmitting && 'is-loading')} value={"submit"}>Submit</button>
             </div>
         </form>
     );
