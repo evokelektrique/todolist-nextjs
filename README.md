@@ -7,15 +7,9 @@ This is a Next.js frontend application that interacts with the Laravel Todo List
 To get started with this Next.js application:
 
 1. Clone this repository to your local machine.
-2. Navigate to the project directory and run `npm install` to install the project dependencies.
-3. Create a `.env.development` file and configure your API endpoints, such as the Laravel API base URL. For example:
-
-```env
-API_BASE_URL=http://localhost:8000
-NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
-```
-
-Start the development server by running npm run dev. The application will be accessible at <http://localhost:3000>.
+2. Navigate to the project directory and run `npm install` or `bun install` to install the project dependencies.
+3. Create a `.env.development` file and configure your API endpoints, such as the Laravel API base URL. For example: `NEXT_PUBLIC_BACKEND_URL=http://localhost:8000`
+4. Start the development server by running `npm run dev` or `bun dev`. The application will be accessible at <http://localhost:3000>.
 
 ## Features
 
